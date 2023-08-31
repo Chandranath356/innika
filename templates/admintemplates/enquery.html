@@ -1,0 +1,53 @@
+{% extends 'admintemplates/layout.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper">
+    <div class="page-content">
+        <!-- <h6 class="mb-0 text-uppercase">Location</h6>
+        <hr/> -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for en in enquery %}
+                            <tr>
+                                <td>{{en.first_name}} {{en.last_name}}</td>
+                                <td>{{en.email}}</td>
+                                <td>{{en.phone}}</td>
+                                <td>{{en.location}}</td>
+                                <td>{{en.comments}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Comment</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+      } );
+</script>
+{% endblock %}

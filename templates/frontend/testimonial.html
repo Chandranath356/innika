@@ -1,0 +1,45 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+<section class="breadcrumb-main pb-20 pt-20" style="background-image: url(media/bg/bg2.jpg);">
+    <div class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content d-md-flex align-items-center pt-6">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Our Review</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="dot-overlay"></div>
+</section>
+<section class="testimonial pb-6">
+    <div class="container"> 
+        <div class="section-title mb-4 pb-1 w-75 mx-auto text-center">
+            <h2 class="m-0">Good Reviews By <span>Clients</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div> 
+        <div class="row review-slider">
+            {%for test in testimonial  %}
+            <div class="col-sm-4 item">
+                <div class="testimonial-item1 text-center">
+                    <div class="details">
+                        <p class="m-0">{% autoescape off %}{{test.content}}{% endautoescape %}</div>
+                    <div class="author-info mt-2">
+                        <a href="#"><img src="media/{{test.images}}" alt=""></a>
+                        <div class="author-title">
+                            <h4 class="m-0 theme2">{{test.name}}</h4>
+                            <span>{{test.designation}}</span>
+                        </div>
+                    </div>
+                    <i class="fa fa-quote-left mb-2"></i>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

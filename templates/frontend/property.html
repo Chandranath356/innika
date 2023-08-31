@@ -1,0 +1,172 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+ <!-- BreadCrumb Starts -->  
+ <section class="breadcrumb-main pb-20 pt-20" style="background-image: url(/media/bg/bg2.jpg);">
+    <div class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content d-md-flex align-items-center pt-6">
+
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Our Properties</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="dot-overlay"></div>
+</section>
+<!-- BreadCrumb Ends --> 
+
+<section class="blog trending">
+    <div class="container">
+        <div class="listing-main listing-main1">
+            <form class="form-find d-lg-flex justify-content-between p-4 bg-grey borderall mb-4">
+                <div class="form-group me-2">
+                    <div class="input-box">
+                        <select class="niceSelect location">
+                            <option value="">All Locations</option>
+                            {%for loc in location %}
+                                <option value="{{loc.id}}"  {%if loc.id|add:0 == request.GET.loc|add:0 %}  selected {%endif%}>{{loc.title}}</option>
+                            {%endfor%}
+                        </select>
+                    </div> 
+                </div>
+                <div class="form-group me-2">
+                    <div class="input-box">
+                        <select class="niceSelect type">
+                            <option value="" >All Types</option>
+                            <option value="1" {%if request.GET.type == '1' %} selected {%endif%}>Apartment</option>
+                            <option value="2" {%if request.GET.type == '2' %} selected {%endif%}>Villa</option>
+                            <option value="3" {%if request.GET.type == '3' %} selected {%endif%}>Flat</option>
+                            <option value="4" {%if request.GET.type == '4' %} selected {%endif%}>Rooms</option>
+                            <option value="5" {%if request.GET.type == '5' %} selected {%endif%}>House</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class="form-group me-2">
+                    <div class="input-box">
+                        <select class="niceSelect status">
+                            <option value="">All Status</option>
+                            <option value="for_rent" {%if request.GET.status == 'for_rent' %} selected {%endif%}>For Rent</option>
+                            <option value="for_sale" {%if request.GET.status == 'for_sale' %} selected {%endif%}>For Sale</option>
+                        </select>
+                    </div> 
+                </div>
+
+                <div class="form-group text-center w-100">
+                    <input type="submit" class="nir-btn w-100 search" id="submit3" value="Search">
+                    <!-- <a class="nir-btn w-100 search" style="color: white !important;">Search</a> -->
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</section>
+<!-- style="z-index: -1;" -->
+<section class="trending add-custom-style" >
+    <div class="container"> 
+
+        <div class="trend-box">
+            <div class="row">
+                {%for pro in properties  %}
+                <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                    <div class="trend-item box-shadow rounded">
+                        <div class="trend-image">
+                            <img src="/media/{{pro.images}}" alt="image">
+                            <div class="trend-meta d-flex align-items-center justify-content-between">
+                                <div class="entry-author">
+                                    <span>Jenny Lofar</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trend-content p-4 bg-white">
+                            <h5 class="theme">
+                              {%if pro.properties.type|add:0 == 1 %}
+                                Apartment
+                              {%elif pro.properties.type|add:0 == 2 %}
+                                Villa
+                              {%elif pro.properties.type|add:0 == 3 %}
+                                Flat
+                              {%elif pro.properties.type|add:0 == 4 %}
+                                Rooms
+                              {%elif pro.properties.type|add:0 == 5 %}
+                                House
+                              {%endif%}</h5>
+                            <h4><a href="/propertiesdetails/{{pro.properties.slug}}/">{{pro.properties.address}}</a></h4>
+                            <p class="mb-0">
+                                {% autoescape off %}
+                                {{pro.properties.short_content}}
+                                {% endautoescape %}
+                            </p>
+                        </div>
+                        <ul class="d-flex align-items-center justify-content-between bg-lgrey p-3 px-4">
+                            <li class="me-2"><i class="fa fa-eye"></i> {{pro.properties.bedroom}} Beds</li>
+                            <li class="me-2"><i class="fa fa-heart"></i> {{pro.properties.bathroom}} Baths</li>
+                            <li><i class="fa fa-comments"></i> {{pro.properties.property_size}} Sq Ft</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div> 
+
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+    $( document ).ready(function() {
+        // $('.type').niceSelect('destroy')
+        // console.log($('.type').niceSelect());
+    });
+    $('.search').click(function(){
+        var location_search = $('.location').val();
+        var status_search = $('.status').val();
+        var type_search = $('.type').val();
+        searchObj = new Object();
+        if(location_search){
+            searchObj.loc = location_search;
+        }
+        if(status_search){
+            searchObj.status = status_search;
+        }
+        if(type_search){
+            searchObj.type = type_search;
+        }
+        var query_params = $.param(searchObj);
+        var oldURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        var newUrl = oldURL+"?"+query_params;
+        if (window.history != 'undefined' && window.history.pushState != 'undefined') {
+            window.history.pushState({ path: newUrl }, '', newUrl);
+            location.reload();
+        }
+        return false;
+        
+    })
+</script>
+<script>
+    $('.nice-select').click(function(){
+        if($(this).hasClass("open")){
+            // $(this).removeClass('open');
+        }else{
+            $('.add-custom-style').css('z-index','-1');
+            $('.nice-select').removeClass('open');
+            $(this).addClass('open');
+            
+        }
+        
+    })
+    $('body').click(function(e){
+       
+        if ($(e.target).hasClass('nice-select')) {
+            return false;
+        }
+        $('.add-custom-style').css('z-index','0');
+       
+    })
+</script>
+{% endblock %}

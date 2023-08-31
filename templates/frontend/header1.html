@@ -1,0 +1,43 @@
+    <!-- header starts -->
+    {% load static %}
+    <header class="main_header_area {% if 'contact-us' in request.build_absolute_uri %} {% else %} headerstye-1 {% endif %}">
+        <!-- Navigation Bar -->
+        <div class="header_menu" id="header_menu">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="/">
+                                <img src="{%static 'frontend/images/slider/logo.png' %}" alt="image">
+                                <img src="{%static 'frontend/images/slider/logo.png' %}" alt="image">
+                            </a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav" id="responsive-menu">
+                                {% for i in menu %}
+
+                                <li class="{% if i.slug in request.path %} active {% else %} {% endif %}"><a href="{{i.slug}}">{{i.name}}</a></li>  
+                                {% endfor %}
+                                
+                                <!-- <li class="active"><a href="about.html">Locations</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="#">Additional Services</a></li>
+                                <li><a href="#">whats included</a></li>
+                                <li><a href="#">Testimonials </a></li>
+                                <li><a href="#">Contact Us</a></li>                                 -->
+                            </ul>
+                        </div><!-- /.navbar-collapse -->   
+                        <div class="register-login d-flex align-items-center">                         
+                            <a href="/enquery" class="nir-btn white">Make an enquiry</a>
+                        </div> 
+
+                        <div id="slicknav-mobile"></div>
+                    </div>
+                </div><!-- /.container-fluid --> 
+            </nav>
+        </div>
+        <!-- Navigation Bar Ends -->
+    </header>
+    <!-- header ends -->

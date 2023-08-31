@@ -1,0 +1,54 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+<section class="breadcrumb-main pb-20 pt-20" style="background-image: url(media/bg/bg2.jpg);">
+    <div class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content d-md-flex align-items-center pt-6">
+
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Whats included</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="dot-overlay"></div>
+</section>
+<!-- BreadCrumb Ends --> 
+
+
+<!-- All contents page starts -->
+<section class="about-us bg-white pb-6 pt-6">
+    <div class="container">
+        <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
+            <h2 class="m-0">whats <span> included</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>              
+    </div>
+</section>
+<section class="about-us pb-6">
+    <div class="container">
+        <div class="about-image-box">
+            <div class="row d-flex align-items-center justify-content-between">
+                <div class="col-lg-5 col-sm-12 mb-4">
+                    <div class="about-image p-3 box-shadow position-relative">
+                        <img src="media/bg/bg2.jpg" alt="" class="w-100">
+                        
+                    </div>
+                </div>
+                <div class="col-lg-7 col-sm-12 mb-4">
+                    <div class="about-content">
+                        <h4 class="theme d-inline-block">whats included</h4>
+                        <h2 class="border-b mb-2 pb-2">whats included 1</h2>
+                        <p class="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat <br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'admintemplates/layout.html' %}
+{% block content %}
+{% block extrahead %}
+<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+{{ block.super }}
+{% endblock %}
+<div class="page-wrapper">
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Forms</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Text Editor</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--end breadcrumb-->
+        <form action="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="card">
+                <div class="card-body">
+                    {% for field in form %}
+                    <div class="item-content">
+                        <div class="mb-3">
+                            
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                             {{ field }}
+                             <span class="text-danger">{{field.errors|escape}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <!-- <div class="item-content">
+                        <div class="mb-3">
+                            <label for="test_0_name text-uppercase" class="form-label">Location Name</label>
+                            <input type="text" class="form-control" name="name" id="test_0_name" placeholder="Location Name" data-name="name" name="test[0][name]" value="">
+                        </div>
+                    </div>
+                    <label class="mb-2">Location Details</label>
+                    <div id="editor" class="mb-3" name="description">
+                        
+
+                    </div> -->
+                    <input type="submit" class="btn btn-primary mb-3" value="Update Location">    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+
+	<!-- <script>
+		var quill = new Quill('#editor', {
+		  theme: 'snow'
+		});
+	</script> -->
+{% endblock %}

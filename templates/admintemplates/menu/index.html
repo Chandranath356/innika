@@ -1,0 +1,427 @@
+{% extends 'admintemplates/layout.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper">
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Properties</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Menu</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--end breadcrumb-->
+        <!-- <h6 class="mb-0 text-uppercase">Location</h6>
+        <hr/> -->
+        <div class="row">
+            <div class="col-md-4">
+                <h6 class="text-center">Add Menu Items</h6>
+                <div class="card h-90">
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Page
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                                    <div class="accordion-body">
+                                       {% for x in page %}
+                                            <div class="form-check">
+                                                <input class="form-check-input page singleselect" type="checkbox" id="check{{x.id}}" data-slug="/page/{{x.slug}}" value="{{x.id}}"  data-class="page" data-id="pageselect"/>
+                                                <label class="form-check-label" for="check{{x.id}}">{{x.title}}</label>
+                                            </div>
+                                       {% endfor %}
+                                       <div class="d-flex justify-content-between">
+                                            <div>
+                                                <input type="checkbox" class="form-check-input selectall" id="pageselect" data-class="page"/>
+                                                <label class="form-check-label" for="pageselect">Select All</label>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-light addmenu" id="addtomenufrompage" data-id="page">Add to Menu</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Testimonial
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                                    <div class="accordion-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input testimonial singleselect" type="checkbox" id="checktestimonial" value="testimonial" data-class="testimonial" data-id="testimonialselect" data-slug="/testimonial"/>
+                                            <label class="form-check-label" for="checktestimonial">Testimonial</label>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <input type="checkbox" class="form-check-input selectall" id="testimonialselect" data-class="testimonial"/>
+                                                <label class="form-check-label" for="testimonialselect">Select All</label>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-light addmenu"  data-id="testimonial">Add to Menu</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        whats included
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input faqs singleselect" type="checkbox" id="checkfaqs" value="testimonial" data-class="faqs" data-id="faqsselect"  data-slug="/faqs"/>
+                                            <label class="form-check-label selectall" for="checkfaqs">whats included</label>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <input type="checkbox" class="form-check-input selectall" id="faqsselect" data-class="faqs"/>
+                                                <label class="form-check-label" for="faqsselect">Select All</label>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-light addmenu" data-id="faqs">Add to Menu</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTen">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseThree">
+                                        Custom Links
+                                    </button>
+                                </h2>
+                                <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="form-group">
+                                            <label>Url</label>
+                                            <input type="text" class="form-control" id="url">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Link Text</label>
+                                            <input type="text" class="form-control" id="link">
+                                            <span class="text-danger" id="linkerror"></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div>
+                                                <button class="btn btn-light" data-id="faqs" id="customlink">Add to Menu</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Locations
+                        </button>
+                        </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                            {% for x in location %}
+                            <div class="form-check">
+                                <input class="form-check-input locations singleselect" type="checkbox" id="check{{x.id}}" value="{{x.id}}" data-class="locations" data-id="locationsselect"/>
+                                <label class="form-check-label" for="check{{x.id}}">{{x.title}}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <input type="checkbox" class="form-check-input selectall" id="locationsselect" data-class="locations"/>
+                                    <label class="form-check-label" for="locationsselect">Select All</label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-light addmenu" data-id="locations">Add to Menu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFour">
+                        Property
+                    </button>
+                    </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body">
+                        {% for x in properties %}
+                        <div class="form-check">
+                            <input class="form-check-input properties singleselect" type="checkbox" id="check{{x.id}}" value="{{x.id}}" data-class="properties" data-id="propertiesselect"/>
+                            <label class="form-check-label" for="check{{x.id}}">{{x.title}}</label>
+                        </div>
+                        {% endfor %}
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <input type="checkbox" class="form-check-input selectall" id="propertiesselect" data-class="properties"/>
+                                <label class="form-check-label" for="propertiesselect">Select All</label>
+                            </div>
+                            <div>
+                                <button class="btn btn-light addmenu" id="addtomenufromtestimonial" data-id="properties">Add to Menu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h6 class="text-center">Menu Structure</h6>
+                <div class="card h-90">
+                    <div class="card-body" id="menu_items" style="position: relative;">
+                        {% for x in menu %}
+                            <div class="card w-50 item d-flex align-items-center flex-row pr-11 depth-0" data-id="{{x.menu_id}}">
+                                <div class="card-body" data-url="{{x.slug}}">{{x.name}}</div>
+                                <div class="font-22 text-red delete"><i class="fadeIn animated bx bx-trash"></i>
+                                </div>
+                            </div>
+                            {% for y in x.submenu %}
+                                <div class="card w-50 item d-flex align-items-center flex-row pr-11 depth-1" data-id="{{y.menu_id}}">
+                                    <div class="card-body" data-url="{{x.slug}}">{{y.name}}</div>
+                                    <div class="font-22 text-red delete"><i class="fadeIn animated bx bx-trash"></i>
+                                    </div>
+                                </div>
+                                {% for z in y.submenu %}
+                                    <div class="card w-50 item d-flex align-items-center flex-row pr-11 depth-2" data-id="{{z.menu_id}}">
+                                        <div class="card-body" data-url="{{x.slug}}">{{z.name}}</div>
+                                        <div class="font-22 text-red delete"><i class="fadeIn animated bx bx-trash"></i>
+                                        </div>
+                                    </div>
+                                    
+                                {% empty %}
+                                {% endfor %}
+                            {% empty %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary mb-3 button_submit">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span>
+        </div> -->
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+	<!--notification js -->
+	<script src="{%static 'assets/plugins/notifications/js/lobibox.min.js' %}"></script>
+	<script src="{%static 'assets/plugins/notifications/js/notifications.min.js' %}"></script>
+	<script src="{%static 'assets/plugins/notifications/js/notification-custom-script.js' %}"></script>
+<script>
+    var page_id = [];
+    $(document).ready(function(){
+        $('#example').DataTable();
+      });
+    $('.selectall').click(function(){
+        let selectallid = $(this).attr('id');
+        let selectallclass = $(this).attr('data-class');
+        if(document.getElementById(selectallid).checked){
+            $('.'+selectallclass).prop('checked',true);
+        }else{
+            $('.'+selectallclass).prop('checked',false);
+        }
+    })
+    $('.singleselect').click(function(){
+        let selectallclass = $(this).attr('data-class');
+        let selectallid = $(this).attr('data-id');
+        if($('.'+selectallclass+':checkbox:checked').length == $('.'+selectallclass+':checkbox').length){
+            $('#'+selectallid).prop('checked',true);
+        }else{
+            $('#'+selectallid).prop('checked',false);
+        }
+    })
+    let locations_array= [];
+    $('.addmenu').click(function(){
+        let attribute = $(this).data('id');
+        var seleceted = document.querySelectorAll('.'+attribute+':checked');
+        $(seleceted).each(function(index,value){
+        let var_html = $(value).next('label').text();
+        let var_slug = $(value).attr('data-slug');
+        let id = parseInt($(this).val());
+        $('#menu_items').append(`<div class="card w-50 item d-flex align-items-center flex-row pr-11 depth-0" draggable="true">
+                    <div class="card-body" data-url="${var_slug}">${var_html}</div> <div class="font-22 text-red delete"><i class="fadeIn animated bx bx-trash"></i>
+                                </div></div>`);               
+        });
+        $('.'+attribute).prop('checked',false);
+        createdatabaseserilization();        
+    })
+
+    $('#customlink').click(function(){
+        let link = $('#link').val();
+        let url = $('#url').val();
+        if(link){
+            $('#linkerror').text('');
+            $('#menu_items').append(`<div class="card w-50 item d-flex align-items-center flex-row pr-11 depth-0" draggable="true">
+                    <div class="card-body" data-url="${url}">${link}</div> <div class="font-22 text-red delete"><i class="fadeIn animated bx bx-trash"></i>
+                                </div></div>`); 
+            $('#link').val('');
+            createdatabaseserilization();
+        }else{
+            $('#linkerror').text('Please Enter Link Text');
+        }
+        
+    })
+
+    // $( function() {
+    var databasearrange = [];
+    $( "#menu_items" ).sortable({
+        start: function(e, ui) {
+            
+        },
+        change: function(e, ui){
+            
+        },
+        stop:function(e, ui){
+            moveslide(ui);
+            createdatabaseserilization()
+        },
+        sort:function(e,ui){
+            
+        }
+    });
+    function moveslide(ui){
+        let prevallclass = $(ui.item[0]).prev().attr('class');
+        // console.log(prevallclass);
+        let prevallclassarray = prevallclass.split(" ");
+        console.log(prevallclassarray);
+        let checkposition = prevallclassarray[7].split("-")[1];
+        if($(ui.item[0]).prevAll().length>0){
+            console.log(ui.offset.left);
+            console.log(checkposition);
+            if(checkposition==0){
+                if(ui.offset.left>710){
+                    $(ui.item[0]).removeClass('depth-0');
+                    $(ui.item[0]).addClass('depth-1');
+                }else{
+                    $(ui.item[0]).removeClass('depth-1');
+                    $(ui.item[0]).addClass('depth-0');
+                    $(ui.item[0]).removeClass('depth-2');
+                }
+            }else if(checkposition==1 || checkposition==2){
+                console.log(checkposition);
+                if(ui.offset.left>780){
+                    $(ui.item[0]).removeClass('depth-1');
+                    $(ui.item[0]).addClass('depth-2');
+                    $(ui.item[0]).removeClass('depth-0');
+                }else if(ui.offset.left<710){
+                    $(ui.item[0]).removeClass('depth-1');
+                    $(ui.item[0]).removeClass('depth-2');
+                    $(ui.item[0]).addClass('depth-0');
+                }else if(ui.offset.left<779 && ui.offset.left>709){
+                    $(ui.item[0]).addClass('depth-1');
+                    $(ui.item[0]).removeClass('depth-0');
+                    $(ui.item[0]).removeClass('depth-2');
+                }
+            }else{
+
+            }
+        }
+
+    }
+    
+    function createdatabaseserilization(){
+        databasearrange = [];
+        $('.item').each(function(index,value){
+            $(value).attr('data-id',(index+1));
+        })
+
+        $('.item').each(function(index,value){
+            let index1 = $(value).attr('data-id');
+            let currentdivposition = value.classList[7].split('-')[1];
+            let prevdivcheckposition = 0;
+            let prevallclassArray = [];
+            let parent_id = 0;
+            if(index > 0){
+                let prevallclassArray = $(this).prev().attr('class').split(" ");
+                    prevdivcheckposition = prevallclassArray[7].split("-")[1];
+            }
+            let prev = $(value).prev();
+            let previndex = $(prev).attr('data-id');
+            if(currentdivposition == 0){
+                parent_id = 0;
+            }else if(currentdivposition>prevdivcheckposition){
+                parent_id = $(value).prev(".depth-"+prevdivcheckposition).attr('data-id');
+            }else if(currentdivposition<prevdivcheckposition){
+                if(currentdivposition == 0){
+                    parent_id = $(value).prev(".depth-"+prevdivcheckposition).attr('data-id');
+                }else{
+                    let lastrevpositiondiv = $(value).prevAll(".depth-"+(currentdivposition-1));
+                    parent_id = $(lastrevpositiondiv[0]).attr('data-id');
+                    
+                }
+            }else if(currentdivposition==prevdivcheckposition && currentdivposition!=0){
+                let lastprevdivposition = $(value).prevAll(".depth-"+(currentdivposition-1));
+                let lastpositiondiv = lastprevdivposition[0];
+                console.log(lastpositiondiv);
+                parent_id = parent_id = $(lastpositiondiv).attr('data-id');
+            }
+            let object = {
+                'name':$(value).children('.card-body').text(),
+                'id':parseInt(index1),
+                'slug':$(value).children('.card-body').attr('data-url'),
+                'parent_id':parseInt(parent_id)
+            };
+            databasearrange.push(object);
+        })
+
+        console.log(databasearrange);
+
+    }
+    $(document).on('click','.delete',function(){
+
+            $(this).parent('.item').remove();
+            createdatabaseserilization();
+    })
+
+    $('.button_submit').click(function(){
+        console.log(databasearrange);
+        // return false;
+        $.ajax({
+            type:"POST",
+            url:'/admin/menu',
+            data:{
+                menudata:JSON.stringify(databasearrange),
+                csrfmiddlewaretoken:'{{csrf_token}}'
+            },
+            success:function(res){
+                Lobibox.notify(res.type,
+                {
+                    pauseDelayOnHover: true,
+                    size: 'mini',
+                    rounded: true,
+                    delayIndicator: false,
+                    icon: res.icon,
+                    continueDelayOnInactiveTab: false,
+                    position: 'top right',
+                    msg: res.message
+                });
+            }
+        })
+    })
+//   })
+  
+</script>
+<script>
+    
+</script>
+{% endblock %}

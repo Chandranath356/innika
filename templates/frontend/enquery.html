@@ -1,0 +1,106 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+<section class="breadcrumb-main pb-20 pt-20" style="background-image: url(media/bg/bg2.jpg);">
+    <div class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content d-md-flex align-items-center pt-6">
+
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Make Enquery</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="dot-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+<section>
+    <div class="container">
+        <div class="contact-info-main">
+            <div class="row">
+                <div class="col-lg-10 col-offset-lg-1 mx-auto">
+                    <div class="contact-info bg-white pt-10 pb-10 px-5">
+                        <div id="contact-form1" class="contact-form px-5">
+                            <div class="contact-info-title text-center mb-4 px-5">
+                                <h3 class="mb-1">Make Enquery</h3>
+                                <p class="mb-0">Fundpress site thoughtfully designed for real humans which means the best user experience for your entire community.</p>
+                            </div>
+                            
+                            <div id="contactform-error-msg"></div>
+
+                            <form method="post" action="#" name="contactform2" id="makeenquery">
+                                <div class="form-group mb-2">
+                                    <input type="text" name="first_name" class="form-control" id="fullname" placeholder="First Name">
+                                    <span class="error text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="last_name" class="form-control" id="llastname" placeholder="Last Name">
+                                    <span class="error text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="email" name="email"  class="form-control" id="email" placeholder="Email">
+                                    <span class="error text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="phone" class="form-control" id="phnumber" placeholder="Phone">
+                                    <span class="error text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="location" class="form-control" id="location" placeholder="Location">
+                                    <span class="error text-danger"></span>
+                                </div>
+                                <div class="textarea mb-2">
+                                    <textarea name="comments" placeholder="Enter a message"></textarea>
+                                    <span class="error text-danger"></span>
+                                </div>
+                                <div class="comment-btn text-center">
+                                    <input type="submit" class="nir-btn" id="submit2" value="Enquery">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+    $("#makeenquery").validate({      
+      submitHandler: function() {
+        $.ajax({
+          url : '/addenquery',
+          type : 'POST',
+          data : {
+            first_name : $('input[name="first_name"]').val(),
+            last_name : $('input[name="last_name"]').val(),
+            email : $('input[name="email"]').val(),
+            phone : $('input[name="phone"]').val(),
+            comments : $('textarea[name="comments"]').val(),
+            location:$('input[name="location"]').val(),
+            csrfmiddlewaretoken:'{{csrf_token}}'
+          },
+          success : function(result){
+            if(result.type == 'error'){
+            var error_object = Object.keys(result.msg).map((key) => [key, result.msg[key]]);
+            $(error_object).each(function(index,val){
+                $('.form-control[name="'+val[0]+'"]').siblings('.error').html(val[1]);
+               
+            })
+            }else{
+                $('.error').text('');
+                $("#makeenquery")[0].reset();
+            }
+          }     
+        });
+
+      }
+    });
+
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+   <!-- banner starts -->
+    <!-- BreadCrumb Starts -->  
+    
+    <!-- BreadCrumb Ends -->
+<!-- banner ends -->
+{% autoescape off %}
+    {{page.content}}
+{% endautoescape %}
+{% endblock %}

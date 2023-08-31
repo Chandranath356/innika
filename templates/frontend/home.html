@@ -1,0 +1,330 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+   <!-- banner starts -->
+<section class="banner overflow-hidden">
+    <div class="slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slide-inner">
+                        <div class="slide-image" style="background-image:url(static/frontend/images/slider/1.jpg)"></div>
+                        <div class="swiper-content">
+                            <div class="entry-meta mb-0">
+                                <span class="entry-category"><a href="#" class="white"> <img src="{%static 'frontend/images/slider/midd-logo.png' %}"></a></span>
+                            </div>
+                            <h1 class="mb-1"><a href="#" class="white">Arrow Living</a></h1>
+                            <h2 class="mb-1"><a href="#" class="white">‘Enhance your experience’</a></h2>
+                        </div>
+                        <div class="overlay"></div>
+                    </div> 
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-inner">
+                        <div class="slide-image" style="background-image:url(static/frontend/images/slider/1.jpg)"></div>
+                        <div class="swiper-content">
+                            <div class="entry-meta mb-0">
+                                <span class="entry-category"><a href="#" class="white"> <img src="static/frontend/images/slider/midd-logo.png"></a></span>
+                            </div>
+                            <h1 class="mb-1"><a href="#" class="white">Arrow Living</a></h1>
+                            <h2 class="mb-1"><a href="#" class="white">‘Enhance your experience’</a></h2>
+                        </div>
+                        <div class="overlay"></div>
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Add Arrows -->   
+</section>
+<!-- banner ends -->
+
+<!-- form main starts -->
+<div class="form-main">
+    <div class="container">
+        <div class="form-content">
+
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col-lg">
+                                <div class="form-group mb-0">
+                                    <label>Search Property</label>
+                                    <div class="input-box">
+                                        <i class="fa fa-search"></i>
+                                        <input type="text" placeholder="Search Property" id="search">
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group mb-0">
+                                    <label>Location</label>
+                                    <div class="input-box">
+                                        <i class="fa fa-map-marker-alt"></i>
+                                        <select class="niceSelect" id="location">
+                                            <option>All Location</option>
+                                            {% for loc in location %}
+                                                <option value="{{loc.id}}">{{loc.title}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>                            
+                                </div>
+                            </div>
+                               <div class="col-lg">
+                                <div class="form-group mb-0 mt-4">
+                                    <a href="javascript:void(0)" class="nir-btn w-100 search" ><i class="fa fa-search mr-2"></i> Search Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col-lg">
+                                <div class="form-group mb-0">
+                                    <label>Search Property</label>
+                                    <div class="input-box">
+                                        <i class="flaticon-search"></i>
+                                        <input type="text" placeholder="Search Property">
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group mb-0">
+                                    <label>Location</label>
+                                    <div class="input-box">
+                                        <i class="flaticon-placeholder"></i>
+                                        <select class="niceSelect">
+                                            <option value="1">Input Location</option>
+                                            <!-- {% for loc in location %}
+                                                <option value="{{loc.id}}">{{loc.title}}</option>
+                                            {% endfor %} -->
+                                            
+                                        </select>
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group mb-0">
+                                    <label>Property Type</label>
+                                    <div class="input-box">
+                                        <i class="flaticon-add-user"></i>
+                                        <select class="niceSelect">
+                                            <option value="1">Luxury</option>
+                                            <option value="2">Deluxe</option>
+                                            <option value="3">Premium</option>
+                                        </select>
+                                    </div>                             
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group mb-0 mt-4">
+                                    <a href="#" class="nir-btn w-100"><i class="fa fa-search mr-2"></i> Search Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- form main ends -->
+     <!-- trending-topic starts -->
+     <section class="trending-topic pb-6">
+        <div class="container">
+            <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
+                <h2 class="m-0">Top Property <span>Places</span></h2>
+                <p>Arrow Living ‘Enhance your experience’</p>
+            </div>
+            <div class="trending-topic-main">
+                <div class="row shop-slider">
+                    {% for loc in location %}
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="trending-topic-item box-shadow before-none">
+                            <div class="trending-topic-image overflow-hidden">
+                                <img src="media/{{loc.images}}" alt="">
+                            </div>
+                            <div class="trending-topic-title p-3 bg-white w-100 d-inline-block">
+                                <h5 class="mb-1">
+                                    <a href="grid-leftfilter.html">{{loc.title}}</a>
+                                </h5>
+                                <p class="mb-0">{{loc.properties_count}} Properties</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- trending-topic ends -->
+
+    
+ <!-- Trending Starts -->
+    <section class="trending bg-grey pt-9">
+        <div class="container">
+            <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
+                <h2 class="m-0">Top <span>Property</span></h2>
+                <p>Arrow Living ‘Enhance your experience’</p>
+            </div>  
+            <div class="trend-box">
+                <div class="row">
+                    {%for pro in property  %}
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="trend-item box-shadow rounded">
+                            <div class="trend-image">
+                                <img src="/media/{{pro.images}}" alt="image">
+                                <div class="trend-meta d-flex align-items-center justify-content-between">
+                                    <div class="entry-author">
+                                         <span>Jenny Lofar</span>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="trend-content p-4 bg-white">
+                                <h5 class="theme">
+                                    {%if pro.properties.type|add:0 == 1 %}
+                                      Apartment
+                                    {%elif pro.properties.type|add:0 == 2 %}
+                                      Villa
+                                    {%elif pro.properties.type|add:0 == 3 %}
+                                      Flat
+                                    {%elif pro.properties.type|add:0 == 4 %}
+                                      Rooms
+                                    {%elif pro.properties.type|add:0 == 5 %}
+                                      House
+                                    {%endif%}
+                                </h5>
+                                <h4><a href="detail-leftside.html">{{pro.properties.address}}</a></h4>
+                                <p class="mb-0">
+                                    {% autoescape off %}
+                                    {{pro.properties.short_content}}
+                                    {% endautoescape %}
+                                </p>
+                                
+                            </div>
+                            <ul class="d-flex align-items-center justify-content-between bg-lgrey p-3 px-4">
+                                <li class="me-2"><i class="fa fa-eye"></i> {{pro.properties.bedroom}} Beds</li>
+                                <li class="me-2"><i class="fa fa-heart"></i> {{pro.properties.bathroom}} Baths</li>
+                                <li><i class="fa fa-comments"></i> {{pro.properties.property_size}} Sq Ft</li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="trend-btn text-center"><a href="/properties/" class="nir-btn">View All Listings</a></div>
+            </div>    
+        </div>
+    </section>
+    <!-- Trending Ends -->
+
+
+
+ <!-- about-us starts -->
+    <section class="about-us pb-5 pt-10">
+        <div class="container">
+            <div class="about-image-box">
+                <div class="row d-flex align-items-center justify-content-between">
+                    <div class="col-lg-6 col-sm-12 mb-4">
+                        <div class="about-content">
+                            <h4 class="bg-theme white px-4 py-1 d-inline-block">About Us</h4>
+                            <h2 class="border-b mb-2 pb-2">Dream Living Spaces Setting New Build</h2>
+                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-4">
+                        <div class="about-image p-3 box-shadow">
+                            <img src="images/trending/trending5.jpg" alt="" class="w-100">
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            
+        </div>
+    </section>
+    <!-- about-us ends -->
+
+    <!-- testomonial start -->
+    <section class="testimonial pb-5 pt-9">
+        <div class="container"> 
+            <div class="section-title mb-4 pb-1 w-75 mx-auto text-center">
+                <h2 class="m-0">OUR CLIENT <span>REVIEWS</span></h2>
+                <p>Arrow Living ‘Enhance your experience’</p>
+            </div> 
+            <div class="row review-slider">
+                <div class="col-sm-4 item">
+                    <div class="testimonial-item1 text-center">
+                        <div class="details">
+                            <p class="m-0">Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simple Lorem Ipsum has been the industry's standard dummy hic et quidem. Dignissimos maxime velit unde inventore quasi vero dolorem.</p>
+                        </div>
+                        <div class="author-info mt-2">
+                            <a href="#"><img src="images/testimonial/img1.jpg" alt=""></a>
+                            <div class="author-title">
+                                <h4 class="m-0 theme2">Jared Erondu</h4>
+                                <span>Supervisor</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-quote-left mb-2"></i>
+                    </div>
+                </div>
+                <div class="col-sm-4 item">
+                    <div class="testimonial-item1 text-center">
+                        <div class="details">
+                            <p class="m-0">Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simple Lorem  Ipsum has been the industry's standard dummy hic et quidem. Dignissimos maxime velit unde inventore quasi vero dolorem.</p>
+                        </div>
+                        <div class="author-info mt-2">
+                            <a href="#"><img src="images/testimonial/img2.jpg" alt=""></a>
+                            <div class="author-title">
+                                <h4 class="m-0 theme2">Cadic Vegeta</h4>
+                                <span>Sr. Consultant</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-quote-left mb-2"></i>
+                    </div>
+                </div>
+                <div class="col-sm-4 item">
+                    <div class="testimonial-item1 text-center">
+                        <div class="details">
+                            <p class="m-0">Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simple Lorem Ipsum has been the industry's standard dummy hic et quidem. Dignissimos maxime velit unde inventore quasi vero dolorem.</p>
+                        </div>
+                        <div class="author-info mt-2">
+                            <a href="#"><img src="images/testimonial/img3.jpg" alt=""></a>
+                            <div class="author-title">
+                                <h4 class="m-0 theme2">Jonathan Beri</h4>
+                                <span>Sales Manager</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-quote-left mb-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial ends --> 
+{% endblock %}
+{% block script %}
+<script>
+    $('.search').click(function(){
+        var search = $('#search').val();
+        var location = $('#location').val();
+        searchObj = new Object();
+        if(search){
+            searchObj.q = search;
+        }
+        if(location){
+            searchObj.loc = location;
+        }
+        var query_params = $.param(searchObj);
+        var oldURL = window.location.protocol + "//" + window.location.host;
+        var newUrl = oldURL+'/properties'+"?"+query_params;
+        if(Object.keys(searchObj).length>0){
+            window.location.href = newUrl; 
+        }
+        
+    })
+</script>
+{% endblock %}

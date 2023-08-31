@@ -1,0 +1,114 @@
+  <!-- footer starts -->
+  {% load static %}
+  
+  <footer class="pt-10 footermain">
+    <div class="footer-upper pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-about">
+                        <img src="images/slider/midd-logo.png" alt="" style="width:14%">
+                        <p class="mt-3 mb-3 white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio suspendisse leo neque iaculis molestie sagittis maecenas aenean eget molestie sagittis.
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-links">
+                        <h3 class="white">Quick link</h3>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">FAQs</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-links">
+                        <h3 class="white">Contact</h3>
+                        <ul>
+                            <p>Quick contact details for reservations </p>                               
+                            
+                            <li class="white"><i class="fa fa-envelope" aria-hidden="true"></i> info@arrowliving.co.uk</li>
+                            <li class="white"><i class="fa fa-phone" aria-hidden="true"></i> +47-252-254-2542</li>
+                        </ul>
+                    </div>
+                </div>
+
+               <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-about">
+                        <h3 class="white">More information</h3>
+                        <p class="mt-3 mb-3 white">
+                            ARROW LIVING LIMITED<br>
+                            Company Number  14598104<br>
+                            VAT 000000000
+
+                        </p>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright pt-2 pb-2">
+        <div class="container">
+            <div class="copyright-inner d-md-flex align-items-center justify-content-between">
+                <div class="copyright-text">
+                    <p class="m-0 white">Copyright @ 2023 Arrow living. All rights reserved. Design by Digitex</p>
+                </div>
+                <div class="social-links">
+                    <ul>  
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>    
+        </div>
+    </div>
+</footer>
+    <!-- *Scripts* -->
+    <script src="{%static 'frontend/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{%static 'frontend/js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'frontend/js/plugin.js' %}"></script>
+    <script src="{%static 'frontend/js/main.js' %}"></script>
+    <script src="{%static 'frontend/js/custom-swiper.js' %}"></script>
+    <script src="{%static 'frontend/js/custom-nav.js' %}"></script>
+    <script>
+     $("#contactform2").validate({      
+      submitHandler: function() {
+        $.ajax({
+          url : '/addcontactus',
+          type : 'POST',
+          data : {
+            first_name : $('input[name="first_name"]').val(),
+            last_name : $('input[name="last_name"]').val(),
+            email : $('input[name="email"]').val(),
+            phone : $('input[name="phone"]').val(),
+            comments : $('textarea[name="comments"]').val(),
+            csrfmiddlewaretoken:'{{csrf_token}}'
+          },
+          success : function(result){
+            if(result.type == 'error'){
+            var error_object = Object.keys(result.msg).map((key) => [key, result.msg[key]]);
+            $(error_object).each(function(index,val){
+                $('.form-control[name="'+val[0]+'"]').siblings('.error').html(val[1]);
+               
+            })
+            }else{
+                $('.error').text('');
+                $("#contactform2")[0].reset();
+            }
+          }     
+        });
+
+      }
+    });
+    </script>
+</body>
+</html>
+<!-- footer ends -->

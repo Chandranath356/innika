@@ -1,0 +1,446 @@
+{% extends 'admintemplates/layout.html' %}
+{% block content %}
+<div class="page-wrapper">
+    <div class="page-content">
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Create Properties</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Properties</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+        <form action="" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="item-content">
+                        <div class="mb-3">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.title.auto_id}}">{{form.title.label}}</label>
+                            {{form.title}}
+                            <span class="text-danger">{{form.title.errors}}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.slug.auto_id}}">{{form.slug.label}}</label>
+                            {{form.slug}}
+                            <span class="text-danger">{{form.slug.errors}}</span>
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li class="text-danger">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.type.auto_id}}">{{form.type.label}}</label>
+                            {{form.type}}
+                            <span class="text-danger">{{form.type.errors}}</span>
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.status.auto_id}}">{{form.status.label}}</label>
+                            {{form.status}}
+                            <span class="text-danger">{{form.status.errors}}</span>
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.address.auto_id}}">{{form.address.label}}</label>
+                            {{form.address}}
+                            <span class="text-danger">{{form.address.errors}}</span>
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.start_form.auto_id}}">Start From</label>
+                            {{form.start_form}}
+                            <span class="text-danger">{{form.start_from.errors}}</span>
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.content.auto_id}}">{{form.content.label}}</label>
+                            {{form.content}}
+                            <span class="text-danger">{{form.content.errors}}</span>
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.short_content.auto_id}}">{{form.short_content.label}}</label>
+                            {{form.short_content}}
+                            <span class="text-danger">{{form.short_content.errors}}</span>
+                        </div>
+                        <div class="mb-3 d-flex flex-column">
+                            <label for="test_0_name text-uppercase" class="form-label" for="{{form.highlight.auto_id}}">{{form.highlight.label}}</label>
+                            {{form.highlight}}
+                            <span class="text-danger">{{form.highlight.errors}}</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="dropzone-wrapper">
+                                <div class="dropzone-desc">
+                                <i class="glyphicon glyphicon-download-alt"></i>
+                                <p>Choose an image file or drag it here.</p>
+                                </div>
+                                <input type="file" id="dropzone" name="image" class="dropzone" accept="image/*" multiple>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="images row">
+
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{form.featured}}
+                                    <label for="test_0_name text-uppercase" class="form-label" for="{{form.featured.auto_id}}">{{form.featured.label}}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{form.top_property}}
+                                    <label for="test_0_name text-uppercase" class="form-label" for="{{form.top_property.auto_id}}">{{form.top_property.label}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-3">
+                            <label for="test_0_name text-uppercase" class="form-label">Select Location</label>
+                            <select class="form-control" name="location">
+                                <option>Select Location</option>
+                                    {% for i in location %}
+                                        <option value="{{i.id}}">{{i.title}}</option>
+                                    {% endfor %}
+                            </select>
+                            <span class="text-danger">{{form.location.errors}}</span>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-6">
+                                <label for="test_0_name text-uppercase" class="form-label">Property Id</label>
+                                {{form.property_id}}
+                                <span class="text-danger">{{form.property_id.errors}}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="test_0_name text-uppercase" class="form-label">Price</label>
+                                {{form.price}}
+                                <span class="text-danger">{{form.price.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-6">
+                                <label for="test_0_name text-uppercase" class="form-label">Property Size</label>
+                                {{form.property_size}}
+                                <span class="text-danger">{{form.property_size.errors}}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="test_0_name text-uppercase" class="form-label">Year Of Built</label>
+                                {{form.year_of_bulit}}
+                                <span class="text-danger">{{form.year_of_bulit.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-6">
+                                <label for="test_0_name text-uppercase" class="form-label">Bedrooms</label>
+                                {{form.bedroom}}
+                                <span class="text-danger">{{form.bedroom.errors}}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="test_0_name text-uppercase" class="form-label">Bathrooms</label>
+                                {{form.bathroom}}
+                                <span class="text-danger">{{form.bathroom.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{form.garage}}
+                                    <label class="form-check-label" for="garage">
+                                        Garage
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.garage.errors}}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    {{form.parking}}
+                                    <label class="form-check-label" for="{{form.parking.auto_id}}">
+                                        {{form.parking.label}}
+                                    </label>
+                                </div>
+                                <span class="text-danger">{{form.parking.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.balcony}}
+                                    <label class="form-check-label" for="{{form.balcony.auto_id}}">
+                                        {{form.balcony.label}}
+                                    </label>
+                                </div>
+                                <span class="text-danger">{{form.balcony.errors}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.air_conditioning}}
+                                    <label class="form-check-label" for="{{form.air_conditioning.auto_id}}">
+                                        {{form.air_conditioning.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.air_conditioning.errors}}</span> 
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.fireplace}}
+                                    <label class="form-check-label" for="{{form.fireplace.auto_id}}">
+                                        {{form.fireplace.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.fireplace.errors}}</span> 
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.dining_room}}
+                                    <label class="form-check-label" for="{{form.dining_room.auto_id}}">
+                                        {{form.dining_room.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.dining_room.errors}}</span> 
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.basement}}
+                                    <label class="form-check-label" for="{{form.basement.auto_id}}">
+                                        {{form.basement.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.basement.errors}}</span> 
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.cooling}}
+                                    <label class="form-check-label" for="{{form.cooling.auto_id}}">
+                                        {{form.cooling.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.cooling.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.lawn}}
+                                    <label class="form-check-label" for="{{form.lawn.auto_id}}">
+                                        {{form.lawn.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.lawn.errors}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.diswasher}}
+                                    <label class="form-check-label" for="{{form.diswasher.auto_id}}">
+                                        {{form.diswasher.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.diswasher.errors}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.microwave}}
+                                    <label class="form-check-label" for="{{form.microwave.auto_id}}">
+                                        {{form.microwave.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.microwave.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-3">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.tv_cable}}
+                                    <label class="form-check-label" for="{{form.tv_cable.auto_id}}">
+                                        {{form.tv_cable.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.tv_cable.errors}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.wifi}}
+                                    <label class="form-check-label" for="{{form.wifi.auto_id}}">
+                                        {{form.wifi.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.wifi.errors}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{form.refrigerator}}
+                                    <label class="form-check-label" for="{{form.refrigerator.auto_id}}">
+                                        {{form.refrigerator.label}}
+                                    </label>
+                                  </div>
+                                  <span class="text-danger">{{form.refrigerator.errors}}</span>
+                            </div>
+                        </div>
+                        {{form.media}}
+                        <input type="submit" class="btn btn-primary" value="Create Property">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxytNgA9bbEAh7LEIek-__963HmNB7WoA&callback=initMap&v=weekly"
+      defer
+    ></script> -->
+<script>
+    $(document).ready(function () {
+        $('#image-uploadify').imageuploadify();
+    })
+    var index=-1;
+    var image_array = [];
+    var cd = new ClipboardEvent("").clipboardData;
+    var FormData = new FormData();
+    var list = new DataTransfer();
+    var uploading_files = {};
+    function readFile(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var total_file=document.getElementById("dropzone").files.length;
+        for(var i=0;i<total_file;i++){
+            index++;
+            image_array.push(event.target.files[i]);
+            var htmlPreview =
+                '<div class="position-relative col-md-1 image" data-index="'+parseInt(index)+'"><img width="100" height="100" src="' + URL.createObjectURL(event.target.files[i]) + '" />\
+                <div class="font-22 text-red position-absolute image-position"><i class="lni lni-close"></i>\
+							</div><div class="position-absolute checkboxpostion"><input type="checkbox" name="feature_image" class="featured_image" value="'+i+'"/></div></div>';
+            $('.images').append(htmlPreview)
+            update_index();
+        }
+  }
+}
+    function update_index(){
+        index = -1;
+        console.log(image_array);
+        $('.image').each(function(i,value){
+            index++;
+            $(this).attr('data-index',index);
+            
+        })
+        console.log(image_array);
+        list.clearData();
+        $(image_array).each(function(index,value){
+            list.items.add(value);
+        });
+
+        document.getElementById("dropzone").files = list.files;
+    }
+    function create_image_data(){
+        // for(var i=0;i<image_array.length;i++){
+        //     list.items.add(image_array[i]);
+        // }
+        
+    }
+    $(document).on('click','.image-position',function(){
+        var indx = $(this).parents('.image').attr('data-index');
+        var files = document.getElementById("dropzone").files;
+        $(this).parents('.image').remove();
+        image_array.splice(indx, 1);
+        console.log(list.files);
+        update_index();
+        document.getElementById("dropzone").files = list.files;
+    })
+
+    $(".dropzone").change(function() {
+        readFile(this);
+    });
+
+    $(document).on('click','.featured_image',function(){
+        if($(this).is(":checked")){
+            $('.featured_image').prop("checked", false);
+            $(this).prop("checked", true);
+        }else{
+            $(this).prop("checked", false);
+        }
+    });
+</script>
+<script>
+//     function initMap() {
+//   const myLatlng = { lat: -25.363, lng: 131.044 };
+//   const map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 4,
+//     center: myLatlng,
+//   });
+//   // Create the initial InfoWindow.
+//     let infoWindow = new google.maps.InfoWindow({
+//         content: "Click the map to get Lat/Lng!",
+//         position: myLatlng,
+//     });
+//     var marker = new google.maps.Marker({
+//                position: new google.maps.LatLng(-25.363, 131.044),
+//                map: map,
+//             });
+//     const directionsService = new google.maps.DirectionsService();
+//     const directionsRenderer = new google.maps.DirectionsRenderer({
+//         draggable: true,
+//         map
+//     });
+//   infoWindow.open(map);
+//   // Configure the click listener.
+//   map.addListener("click", (mapsMouseEvent) => {
+//     // Close the current InfoWindow.
+//     infoWindow.close();
+//     // Create a new InfoWindow.
+//     infoWindow = new google.maps.InfoWindow({
+//       position: mapsMouseEvent.latLng,
+//     });
+//     infoWindow.setContent(
+//       JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+//     );
+//     infoWindow.open(map);
+//   });
+// }
+// function initMap() {
+//     var myLatLng = {lat: 22, lng: 77};
+
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//       center: myLatLng,
+//       zoom: 4
+//     });
+
+//     var marker = new google.maps.Marker({
+//           position: myLatLng,
+//           map: map,
+//           draggable: true
+//         });
+
+//      google.maps.event.addListener(marker, 'dragend', function(marker) {
+//         var latLng = marker.latLng;
+//         console.log(latLng.lat())
+//         myLatLng.lat = latLng.lat();
+//         myLatLng.lng = latLng.lng();
+//         document.getElementById('lat').value = latLng.lat();
+//         document.getElementById('lng').value = latLng.lng();
+//      });
+
+//      google.maps.event.addListener(map, 'click', function(event) {
+//             marker.setPosition(event.latLng);
+//             console.log(event.latLng.lat());
+//             myLatLng.lat = event.latLng.lat();
+//             myLatLng.lng = event.latLng.lng();
+//             document.getElementById('lat').value = event.latLng.lat();
+//             document.getElementById('lng').value = event.latLng.lng();
+//             console.log(myLatLng);
+//         });
+
+// }
+
+window.initMap = initMap;
+
+</script>
+{% endblock %}

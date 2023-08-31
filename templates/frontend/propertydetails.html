@@ -1,0 +1,174 @@
+{% extends 'frontend/layout.html' %}
+{% block content %}
+{% load static %}
+  <!-- BreadCrumb Starts --> 
+  <section class="breadcrumb-main pb-20 pt-20" style="background-image: url(/media/{{feature_image}});">
+    <div class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content d-md-flex align-items-center pt-6">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{property_details.title}}</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="dot-overlay"></div>
+</section>
+<!-- BreadCrumb Ends --> 
+<!-- Single Property banners -->
+<div class="page-banner pt-10 pb-10">
+    <div class="container">
+        <div class="page-banner-in overflow-hidden">
+            <div class="slider-store">
+                {% for image in properties_image %}
+                    <div>
+                        <img src="/media/{{image.images}}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="slider-thumbs">
+                {% for image in properties_image %}
+                    <div>
+                        <img src="/media/{{image.images}}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- blog starts -->
+<section class="blog bg-lgrey">
+    <div class="container">
+        <div class="detail-main">
+            <div class="detail-maintitle border-b pb-4 mb-4">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-8">
+                        <ul class="detail-inline d-flex align-items-center mb-2">
+                            {% if property_details.featured %}
+                            <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3">Featured</li>
+                            {% endif %}
+                            {% if property_details.type == 'for_sale' %}
+                            <li class="detail-inline-item bg-theme px-4 py-1 white me-3">For Sale</li>
+                            {% elif property_details.type == 'for_rent' %}
+                            <li class="detail-inline-item bg-theme px-4 py-1 white me-3">For Rent</li>
+                            {% endif %}
+                            <li class="detail-inline-item"><i class="fa fa-clock me-1"></i>1 months ago
+                            </li>
+                        </ul>
+                        <div class="detail-maintitle-in">
+                            <h2 class="mb-1">{{property_details.title}}</h2>
+                            <p><i class="fa fa-map-marker-alt me-2"></i>{{property_details.address}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="entry-price text-lg-end text-start">
+                            <h3 class="mb-0"><span class="d-block theme fs-5 fw-normal">Start From</span> £ {{property_details.start_form}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-single">
+
+                <div class="blog-wrapper">
+
+                    <div class="blog-content first-child-cap">
+                        {% autoescape off %}
+                          {{property_details.content}}
+                        {% endautoescape %}
+                    </div>
+
+                    <div class="property-detail mb-4 bg-lgrey p-4 border">
+                        <h4 class="border-b pb-2">Property Details</h4>
+                        <div class="row">
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="d-block fw-bold lh-lg">Property ID : <span class="fw-normal float-end">{{property_details.property_id}}</span></li>
+                                    <li class="d-block fw-bold lh-lg">Price : <span class="fw-normal float-end">${{property_details.price}}</span></li>
+                                    <li class="d-block fw-bold lh-lg">Property Size : <span class="fw-normal float-end">{{property_details.property_size}} Sq Ft</span></li>
+                                    <li class="d-block fw-bold lh-lg">Year Built : <span class="fw-normal float-end">{{property_details.year_of_bulit}}</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="d-block fw-bold lh-lg">Bedrooms  : <span class="fw-normal float-end">{{property_details.bathroom}}</span></li>
+                                    <li class="d-block fw-bold lh-lg">Bathrooms  : <span class="fw-normal float-end">{{property_details.bedroom}}</span></li>
+                                    <li class="d-block fw-bold lh-lg">Garage  : <span class="fw-normal float-end">{%if property_details.garage %} Yes {% else %} No {% endif %}</span></li>
+                                    <li class="d-block fw-bold lh-lg">Parking : <span class="fw-normal float-end">{%if property_details.parking %} Yes {% else %} No {% endif %}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-detail mb-4 bg-grey p-4">
+                        <h4 class="border-bottom pb-2">Offices Amenities</h4>
+                        <div class="row">
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="d-block lh-lg"><i class="{%if property_details.balcony %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Balcony</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.air_conditioning %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Air Conditioning</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.fireplace %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Fireplace</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.dining_room %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Dining room</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="d-block lh-lg"><i class="{%if property_details.basement %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Basement</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.cooling %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Cooling</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.lawn %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Lawn</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.diswasher %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Dishwasher</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="d-block lh-lg"><i class="{%if property_details.microwave %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Microwave</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.tv_cable %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> TV Cable</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.wifi %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> WiFi</li>
+                                    <li class="d-block lh-lg"><i class="{%if property_details.refrigerator %} fa fa-check {% else %} fa fa-times {% endif %} theme"></i> Refrigerator</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-imagelist mb-4">
+                        {% autoescape off %}
+                        {{property_details.highlight}}
+                        {% endautoescape %}
+                        <!-- <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <img src="images/bg/bg1.jpg" alt="image">
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <img src="images/bg/bg2.jpg" alt="image">
+                        </div>
+                        </div> -->
+                    </div>    
+                    <!-- <p class="mb-4">as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- content-line start -->
+<div class="content-line mt-0">
+    <div class="content-line-inner bg-theme2 pb-6 pt-6 p-5">
+        <div class="container">
+            <div class="row d-md-flex align-items-center justify-content-between text-lg-start text-center">
+                <div class="col-lg-9">
+                    <h2 class="mb-0" style="color: #dc9e26;">
+                        Looking for a dream home?
+                    </h2>
+                    <p style="color: #dc9e26;">We can help you realize your dream of a new home</p>
+                </div>
+                <div class="col-lg-3">
+                    <a href="listing-leftfilter.html" class="nir-btn-black float-none float-lg-end">Fine More Properties</a>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<!-- content-line ends -->
+<!-- Trending Ends -->
+{% endblock %}
